@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_app_test01/src/data/model/employee_model.dart';
 import 'package:flutter_app_test01/src/data/repository/employee_repository.dart';
+import 'package:flutter_app_test01/src/data/repository/employees_repository.dart';
 import 'package:meta/meta.dart';
 
 part 'employeesdataget_event.dart';

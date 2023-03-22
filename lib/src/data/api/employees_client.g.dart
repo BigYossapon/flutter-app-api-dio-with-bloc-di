@@ -46,9 +46,9 @@ class _EmployeesClient implements EmployeesClient {
   }
 
   @override
-  Future<dynamic> postEmployeeData({
-    required employeeModel,
-    attach,
+  Future<EmployeeModel> postEmployeeData({
+    employeeModel,
+    file,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -57,54 +57,58 @@ class _EmployeesClient implements EmployeesClient {
     final _data = FormData();
     _data.fields.add(MapEntry(
       'employeeModel',
-      jsonEncode(employeeModel),
+      jsonEncode(employeeModel ?? <String, dynamic>{}),
     ));
-    if (attach != null) {
+    if (file != null) {
       _data.files.add(MapEntry(
-        'attach',
+        'file',
         MultipartFile.fromFileSync(
-          attach.path,
-          filename: attach.path.split(Platform.pathSeparator).last,
+          file.path,
+          filename: file.path.split(Platform.pathSeparator).last,
         ),
       ));
     }
-    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<EmployeeModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
       contentType: 'multipart/form-data',
     )
-        .compose(
-          _dio.options,
-          'employees/add',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+            .compose(
+              _dio.options,
+              'employees/add',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = EmployeeModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<EmployeeModel> putEmployeeData(
+  Future<EmployeeModel> putEmployeeData({
     employeeModel,
     file,
-  ) async {
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = FormData();
     _data.fields.add(MapEntry(
       'employeeModel',
-      jsonEncode(employeeModel),
+      jsonEncode(employeeModel ?? <String, dynamic>{}),
     ));
-    _data.files.add(MapEntry(
-      'file',
-      MultipartFile.fromFileSync(
-        file.path,
-        filename: file.path.split(Platform.pathSeparator).last,
-      ),
-    ));
+    if (file != null) {
+      _data.files.add(MapEntry(
+        'file',
+        MultipartFile.fromFileSync(
+          file.path,
+          filename: file.path.split(Platform.pathSeparator).last,
+        ),
+      ));
+    }
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<EmployeeModel>(Options(
       method: 'PUT',
@@ -124,26 +128,24 @@ class _EmployeesClient implements EmployeesClient {
   }
 
   @override
-  Future<EmployeeModel> deleteEmployeeData(id) async {
+  Future<void> deleteEmployeeData(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<EmployeeModel>(Options(
+    await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              'employee/delete/${id}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = EmployeeModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          'employee/delete/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

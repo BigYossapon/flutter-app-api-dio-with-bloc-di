@@ -15,16 +15,16 @@ abstract class EmployeesClient {
   @GET('employees/get')
   Future<List<EmployeeModel>> getEmployeeData();
 
-  @POST('employees/add')
+  @POST('employee/add')
   @MultiPart()
-  Future<dynamic> postEmployeeData(
-      {@Part() EmployeeModel employeeModel, @Part() File? file});
+  Future<EmployeeModel> postEmployeeData(
+      {@Part() EmployeeModel? employeeModel, @Part() File? file});
 
-  @PUT('employees/edit/{id}')
+  @PUT('employee/edit/{id}')
   @MultiPart()
   Future<EmployeeModel> putEmployeeData(
-      @Part() EmployeeModel employeeModel, @Part() File? file);
+      {@Part() EmployeeModel? employeeModel, @Part() File? file});
 
   @DELETE('employee/delete/{id}')
-  Future<EmployeeModel> deleteEmployeeData(@Path() int id);
+  Future<void> deleteEmployeeData(@Path() int? id);
 }

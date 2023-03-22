@@ -8,22 +8,25 @@ import '../model/employee_model.dart';
 abstract class EmployeesRepository {
   Future<List<EmployeeModel>> getEmployeeData();
 
-  Future<dynamic> postEmployeeData(EmployeeModel employeeModel, File file);
+  Future<EmployeeModel> postEmployeeData(
+      EmployeeModel employeeModel, File? file);
 
-  Future<EmployeeModel> putEmployeeData(EmployeeModel employeeModel, File file);
+  Future<EmployeeModel> putEmployeeData(
+      EmployeeModel employeeModel, File? file);
 
-  Future<EmployeeModel> deleteEmployeeData(int id);
+  Future<void> deleteEmployeeData(int? id);
 }
 
+@Injectable(as: EmployeesRepository)
 class EmployeesRepositoryImpl extends EmployeesRepository {
   final EmployeesClient employeesClient;
 
   EmployeesRepositoryImpl(this.employeesClient);
 
   @override
-  Future<EmployeeModel> deleteEmployeeData(int id) {
+  Future<void> deleteEmployeeData(int? id) {
     // TODO: implement deleteEmployeeData
-    employeesClient.deleteEmployeeData(id);
+    employeesClient.deleteEmployeeData(id!);
     throw UnimplementedError();
   }
 
@@ -35,7 +38,8 @@ class EmployeesRepositoryImpl extends EmployeesRepository {
   }
 
   @override
-  Future postEmployeeData(EmployeeModel employeeModel, File file) {
+  Future<EmployeeModel> postEmployeeData(
+      EmployeeModel employeeModel, File? file) {
     // TODO: implement postEmployeeData
     employeesClient.postEmployeeData(employeeModel: employeeModel, file: file);
     throw UnimplementedError();
@@ -43,9 +47,9 @@ class EmployeesRepositoryImpl extends EmployeesRepository {
 
   @override
   Future<EmployeeModel> putEmployeeData(
-      EmployeeModel employeeModel, File file) {
+      EmployeeModel employeeModel, File? file) {
     // TODO: implement putEmployeeData
-    employeesClient.putEmployeeData(employeeModel, file);
+    employeesClient.putEmployeeData(employeeModel: employeeModel, file: file);
     throw UnimplementedError();
   }
 }
