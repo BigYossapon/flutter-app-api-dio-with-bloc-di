@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_app_test01/src/data/repository/employee_repository.dart';
-
+import 'package:injectable/injectable.dart';
 import '../../../../data/model/employee_model.dart';
 
 part 'employeedataadd_event.dart';
 part 'employeedataadd_state.dart';
 
+@injectable
 class EmployeedataaddBloc
     extends Bloc<EmployeedataaddEvent, EmployeedataaddState> {
   final EmployeeRepository _employeeRepository;

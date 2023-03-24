@@ -1,55 +1,34 @@
 import 'dart:io';
 
-import 'package:flutter_app_test01/src/data/api/employees_client.dart';
+import 'package:dio/dio.dart';
+
 import 'package:injectable/injectable.dart';
 
+import '../api_service/employees_client.dart';
 import '../model/employee_model.dart';
+import 'employees_data_source.dart';
 
-abstract class EmployeesRepository {
-  Future<List<EmployeeModel>> getEmployeeData();
+@lazySingleton
+class EmployeesRepository implements EmployeesDataSource {
+  final EmployeesClient _employeesClient;
 
-  Future<EmployeeModel> postEmployeeData(
-      EmployeeModel employeeModel, File? file);
-
-  Future<EmployeeModel> putEmployeeData(
-      EmployeeModel employeeModel, File? file);
-
-  Future<void> deleteEmployeeData(int? id);
-}
-
-@Injectable(as: EmployeesRepository)
-class EmployeesRepositoryImpl extends EmployeesRepository {
-  final EmployeesClient employeesClient;
-
-  EmployeesRepositoryImpl(this.employeesClient);
+  EmployeesRepository(this._employeesClient);
 
   @override
-  Future<void> deleteEmployeeData(int? id) {
-    // TODO: implement deleteEmployeeData
-    employeesClient.deleteEmployeeData(id!);
-    throw UnimplementedError();
-  }
+  Future<void> deleteEmployeeData(int? id) =>
+      _employeesClient.deleteEmployeeData(id!);
 
   @override
-  Future<List<EmployeeModel>> getEmployeeData() {
-    // TODO: implement getEmployeeData
-    employeesClient.getEmployeeData();
-    throw UnimplementedError();
-  }
+  Future<List<EmployeeModel>> getEmployeeData() =>
+      _employeesClient.getEmployeeData();
 
   @override
-  Future<EmployeeModel> postEmployeeData(
-      EmployeeModel employeeModel, File? file) {
-    // TODO: implement postEmployeeData
-    employeesClient.postEmployeeData(employeeModel: employeeModel, file: file);
-    throw UnimplementedError();
-  }
+  Future<void> postEmployeeData(EmployeeModel employeeModel, File? file) =>
+      _employeesClient.postEmployeeData(
+          employeeModel: employeeModel, file: file);
 
   @override
-  Future<EmployeeModel> putEmployeeData(
-      EmployeeModel employeeModel, File? file) {
-    // TODO: implement putEmployeeData
-    employeesClient.putEmployeeData(employeeModel: employeeModel, file: file);
-    throw UnimplementedError();
-  }
+  Future<void> putEmployeeData(EmployeeModel employeeModel, File? file) =>
+      _employeesClient.putEmployeeData(
+          employeeModel: employeeModel, file: file);
 }

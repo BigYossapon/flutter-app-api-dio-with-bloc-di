@@ -13,6 +13,7 @@ class _EmployeesClient implements EmployeesClient {
     this._dio, {
     this.baseUrl,
   }) {
+    ArgumentError.checkNotNull(_dio, '_dio');
     baseUrl ??= 'http://192.168.1.102:8000/';
   }
 
@@ -46,10 +47,12 @@ class _EmployeesClient implements EmployeesClient {
   }
 
   @override
-  Future<EmployeeModel> postEmployeeData({
+  Future<void> postEmployeeData({
     employeeModel,
     file,
   }) async {
+    ArgumentError.checkNotNull(employeeModel, 'employeeModel');
+    ArgumentError.checkNotNull(file, 'file');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
@@ -68,29 +71,28 @@ class _EmployeesClient implements EmployeesClient {
         ),
       ));
     }
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<EmployeeModel>(Options(
+    await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
       contentType: 'multipart/form-data',
     )
-            .compose(
-              _dio.options,
-              'employees/add',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = EmployeeModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          'employee/add',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
   }
 
   @override
-  Future<EmployeeModel> putEmployeeData({
+  Future<void> putEmployeeData({
     employeeModel,
     file,
   }) async {
+    ArgumentError.checkNotNull(employeeModel, 'employeeModel');
+    ArgumentError.checkNotNull(file, 'file');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
@@ -109,26 +111,25 @@ class _EmployeesClient implements EmployeesClient {
         ),
       ));
     }
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<EmployeeModel>(Options(
+    await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'PUT',
       headers: _headers,
       extra: _extra,
       contentType: 'multipart/form-data',
     )
-            .compose(
-              _dio.options,
-              'employees/edit/{id}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = EmployeeModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          'employee/edit/{id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
   }
 
   @override
   Future<void> deleteEmployeeData(id) async {
+    ArgumentError.checkNotNull(id, 'id');
+
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
