@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'employees_client.dart';
+part of 'employees_apiservice.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,12 +8,11 @@ part of 'employees_client.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _EmployeesClient implements EmployeesClient {
-  _EmployeesClient(
+class _EmployeesApiService implements EmployeesApiService {
+  _EmployeesApiService(
     this._dio, {
     this.baseUrl,
   }) {
-    ArgumentError.checkNotNull(_dio, '_dio');
     baseUrl ??= 'http://192.168.1.102:8000/';
   }
 
@@ -51,8 +50,6 @@ class _EmployeesClient implements EmployeesClient {
     employeeModel,
     file,
   }) async {
-    ArgumentError.checkNotNull(employeeModel, 'employeeModel');
-    ArgumentError.checkNotNull(file, 'file');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
@@ -91,8 +88,6 @@ class _EmployeesClient implements EmployeesClient {
     employeeModel,
     file,
   }) async {
-    ArgumentError.checkNotNull(employeeModel, 'employeeModel');
-    ArgumentError.checkNotNull(file, 'file');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
@@ -128,8 +123,6 @@ class _EmployeesClient implements EmployeesClient {
 
   @override
   Future<void> deleteEmployeeData(id) async {
-    ArgumentError.checkNotNull(id, 'id');
-
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);

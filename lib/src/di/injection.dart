@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_app_test01/src/data/api_service/employees_client.dart';
+import 'package:flutter_app_test01/src/data/api_service/employees_apiservice.dart';
+
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:flutter_app_test01/src/di/injection.config.dart';
@@ -19,9 +20,9 @@ abstract class EmployeeModule {
   Dio get dio => Dio();
 
   @LazySingleton()
-  EmployeesClient employeesClient(
+  EmployeesApiService employeesApiService(
       @injectable Dio dio, @injectable LogInterceptor logInterceptor) {
-    return EmployeesClient(dio);
+    return EmployeesApiService(dio);
   }
 
   @lazySingleton

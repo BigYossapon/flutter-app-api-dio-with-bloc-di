@@ -5,11 +5,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter_app_test01/src/data/model/employee_model.dart';
 import 'package:retrofit/retrofit.dart';
 
-part 'employees_client.g.dart';
+part 'employees_apiservice.g.dart';
 
 @RestApi(baseUrl: 'http://192.168.1.102:8000/')
-abstract class EmployeesClient {
-  factory EmployeesClient(Dio dio) => _EmployeesClient(dio);
+abstract class EmployeesApiService {
+  factory EmployeesApiService(Dio dio) => _EmployeesApiService(dio);
 
   @GET('employees/get')
   Future<List<EmployeeModel>> getEmployeeData();

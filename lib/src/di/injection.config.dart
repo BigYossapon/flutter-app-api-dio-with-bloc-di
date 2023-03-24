@@ -8,11 +8,11 @@
 import 'package:dio/dio.dart';
 
 import 'package:flutter_app_test01/src/blocs/api/employees_data_bloc/put/employeedataedit_bloc.dart';
-import 'package:flutter_app_test01/src/data/api_service/employees_client.dart';
+import 'package:flutter_app_test01/src/data/api_service/employees_apiservice.dart';
 import 'package:flutter_app_test01/src/data/repository/employee_repository.dart';
-
-import 'package:flutter_app_test01/src/data/repository/employees_data_source.dart';
 import 'package:flutter_app_test01/src/data/repository/employees_repository.dart';
+
+import 'package:flutter_app_test01/src/data/repository/employees_repositoryimpl.dart';
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:http/http.dart';
 import 'package:injectable/injectable.dart' as _i2;
@@ -37,22 +37,24 @@ _i1.GetIt $initGetIt(
   );
   final employeeModule = _$EmployeeModule();
   gh.lazySingleton<Dio>(() => employeeModule.dio);
-  gh.factory<EmployeedataeditBloc>(() =>
-      EmployeedataeditBloc(gh<EmployeesDataSource>() as EmployeeRepository));
-  // gh.factory<EmployeesdatagetBloc>(
-  //     () => EmployeesdatagetBloc(get<EmployeesDataSource>()));
 
-  // gh.lazySingleton<LogInterceptor>(() => employeeModule.loggingInter);
-  // gh.factory<EmployeedataaddBloc>(
-  //     () => EmployeedataaddBloc(get<EmployeesDataSource>()));
-  // gh.factory<EmployeedatadeleteBloc>(
-  //     () => EmployeedatadeleteBloc(get<EmployeesDataSource>()));
-  // gh.lazySingleton<EmployeesClient>(() => employeeModule.employeesClient(
-  //       gh<Dio>(),
-  //       gh<LogInterceptor>(),
-  //     ));
-  // gh.lazySingleton<EmployeesRepository>(
-  //     () => EmployeesRepository(get<EmployeesClient>()));
+  gh.factory<EmployeedataeditBloc>(
+      () => EmployeedataeditBloc(getIt<EmployeesRepository>()));
+  gh.factory<EmployeesdatagetBloc>(
+      () => EmployeesdatagetBloc(getIt<EmployeesRepository>()));
+
+  gh.lazySingleton<LogInterceptor>(() => employeeModule.loggingInter);
+  gh.factory<EmployeedataaddBloc>(
+      () => EmployeedataaddBloc(getIt<EmployeesRepository>()));
+  gh.factory<EmployeedatadeleteBloc>(
+      () => EmployeedatadeleteBloc(getIt<EmployeesRepository>()));
+  gh.lazySingleton<EmployeesApiService>(
+      () => employeeModule.employeesApiService(
+            gh<Dio>(),
+            gh<LogInterceptor>(),
+          ));
+  gh.lazySingleton<EmployeesRepositoryimpl>(
+      () => EmployeesRepositoryimpl(getIt<EmployeesApiService>()));
   return getIt;
 }
 
