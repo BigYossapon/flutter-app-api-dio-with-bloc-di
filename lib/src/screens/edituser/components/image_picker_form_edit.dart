@@ -117,9 +117,15 @@ class ImagePickerFormEdit extends StatelessWidget {
           }
           return ElevatedButton.icon(
               onPressed: () {
-                contextedit.read<EmployeedataeditBloc>().add(
-                    EditEmployeedataEvent(
-                        id!, name!, mail!, address!, phone!, position!, file));
+                EmployeeModel employeeModel = EmployeeModel(
+                    name: name!,
+                    mail: mail!,
+                    address: address!,
+                    phone: phone!,
+                    position: position);
+                contextedit
+                    .read<EmployeedataeditBloc>()
+                    .add(EditEmployeedataEvent(employeeModel, file));
                 Navigator.pop(context);
               },
               icon: const Icon(Icons.edit),

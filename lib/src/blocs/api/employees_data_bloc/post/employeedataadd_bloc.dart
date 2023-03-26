@@ -2,9 +2,10 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_app_test01/src/data/repository/employee_repository.dart';
+
 import 'package:injectable/injectable.dart';
 import '../../../../data/model/employee_model.dart';
+import '../../../../data/repository/employees_repository.dart';
 
 part 'employeedataadd_event.dart';
 part 'employeedataadd_state.dart';
@@ -12,7 +13,7 @@ part 'employeedataadd_state.dart';
 @injectable
 class EmployeedataaddBloc
     extends Bloc<EmployeedataaddEvent, EmployeedataaddState> {
-  final EmployeeRepository _employeeRepository;
+  final EmployeesRepository _employeeRepository;
 
   EmployeedataaddBloc(this._employeeRepository)
       : super(EmployeedataaddingState()) {
@@ -22,8 +23,8 @@ class EmployeedataaddBloc
       try {
         //final employee =
         // await _employeeRepository.postEmployeeData(event.employeeModel);
-        await _employeeRepository.postEmployeeData(event.name, event.mail,
-            event.address, event.phone, event.position, event.file);
+        await _employeeRepository.postEmployeeData(
+            event.employeeModel, event.file);
         emit(EmployeedataaddedState('add data success'));
       } catch (e) {
         emit(EmployeedataErrorState(e.toString()));

@@ -14,7 +14,7 @@ import '../../../app_route.dart';
 import '../../../blocs/api/employees_data_bloc/get/employees/employeesdataget_bloc.dart';
 
 import '../../../data/model/employee_model.dart';
-import '../../../data/repository/employee_repository.dart';
+
 import '../../../res/string.dart';
 
 class EmployeeListview extends StatelessWidget {

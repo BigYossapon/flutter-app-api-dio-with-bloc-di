@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_app_test01/src/data/model/employee_model.dart';
-import 'package:flutter_app_test01/src/data/repository/employee_repository.dart';
+
 import 'package:flutter_app_test01/src/data/repository/employees_repositoryimpl.dart';
 import 'package:meta/meta.dart';
 import 'package:injectable/injectable.dart';

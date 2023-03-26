@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_test01/src/data/repository/employees_repositoryimpl.dart';
 import 'package:flutter_app_test01/src/screens/edituser/components/image_picker_form_edit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../app_route.dart';
 import '../../blocs/api/employees_data_bloc/put/employeedataedit_bloc.dart';
 import '../../blocs/image_picker/image_picker_bloc.dart';
-import '../../data/repository/employee_repository.dart';
+import '../../data/repository/employees_repository.dart';
 
 class EditEmployeeDataPage extends StatelessWidget {
   final BuildContext buildContextget;
@@ -28,7 +29,7 @@ class EditEmployeeDataPage extends StatelessWidget {
         create: (BuildContext context) => ImagePickerBloc());
     final employeeDataputBloc = BlocProvider<EmployeedataeditBloc>(
         create: (BuildContext context) =>
-            EmployeedataeditBloc(EmployeeRepository()));
+            EmployeedataeditBloc(EmployeesRepositoryimpl()));
     //set comtroller text
 
     return Scaffold(

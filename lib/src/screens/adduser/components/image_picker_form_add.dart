@@ -91,23 +91,20 @@ class ImagePickerFormAdd extends StatelessWidget {
                 fontSize: 16.0);
           }
         }, builder: (context, state) {
-          if (state is EmployeedataaddedState) {
-            // final SnackBar snackBar = SnackBar(content: Text(state.status));
-            // snackbarKey.currentState?.showSnackBar(snackBar);
-            //Navigator.of(context).pop();
-          }
-          if (state is EmployeedataErrorState) {
-            // final SnackBar snackBar = SnackBar(content: Text(state.status));
-            // snackbarKey.currentState?.showSnackBar(snackBar);
-          }
           return Container(
               child: file == null
                   ? Container()
                   : ElevatedButton.icon(
                       onPressed: () {
-                        context.read<EmployeedataaddBloc>().add(
-                            AddEmployeedataEvent(name!, mail!, address!, phone!,
-                                position!, file!));
+                        EmployeeModel employeeModel = EmployeeModel(
+                            name: name!,
+                            mail: mail!,
+                            address: address!,
+                            phone: phone!,
+                            position: position);
+                        context
+                            .read<EmployeedataaddBloc>()
+                            .add(AddEmployeedataEvent(employeeModel, file!));
                       },
                       icon: const Icon(Icons.upload_file),
                       label: const Text('upload data')));
