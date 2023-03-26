@@ -11,7 +11,7 @@ import 'employees_repository.dart';
 
 @lazySingleton
 @injectable
-class EmployeesRepositoryimpl implements EmployeesRepository {
+class EmployeesRepositoryimpl extends EmployeesRepository {
   late EmployeesApiService _employeesApiService;
 
   EmployeesRepositoryimpl() {
@@ -22,30 +22,30 @@ class EmployeesRepositoryimpl implements EmployeesRepository {
   @override
   Future<void> deleteEmployeeData(int? id) {
     // TODO: implement deleteEmployeeData
-    _employeesApiService.deleteEmployeeData(id);
-    throw UnimplementedError();
+    return _employeesApiService.deleteEmployeeData(id);
+    //throw UnsupportedError;
   }
 
   @override
   Future<List<EmployeeModel>> getEmployeeData() {
     // TODO: implement getEmployeeData
-    _employeesApiService.getEmployeeData();
-    throw UnimplementedError();
+    return _employeesApiService.getEmployeeData();
+    //throw UnimplementedError();
   }
 
   @override
   Future<void> postEmployeeData(EmployeeModel employeeModel, File? file) {
     // TODO: implement postEmployeeData
-    _employeesApiService.postEmployeeData(
+    return _employeesApiService.postEmployeeData(
         employeeModel: employeeModel, file: file);
-    throw UnimplementedError();
+    //throw UnsupportedError;
   }
 
   @override
   Future<void> putEmployeeData(EmployeeModel employeeModel, File? file) {
     // TODO: implement putEmployeeData
-    _employeesApiService.putEmployeeData(
+    return _employeesApiService.putEmployeeData(
         employeeModel: employeeModel, file: file);
-    throw UnimplementedError();
+    //throw UnsupportedError;
   }
 }

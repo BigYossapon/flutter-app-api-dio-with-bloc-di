@@ -76,7 +76,7 @@ class _EmployeesApiService implements EmployeesApiService {
     )
         .compose(
           _dio.options,
-          'employee/add',
+          'employees/add',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -114,7 +114,7 @@ class _EmployeesApiService implements EmployeesApiService {
     )
         .compose(
           _dio.options,
-          'employee/edit/{id}',
+          'employees/edit/{id}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -135,7 +135,7 @@ class _EmployeesApiService implements EmployeesApiService {
     )
         .compose(
           _dio.options,
-          'employee/delete/${id}',
+          'employees/delete/${id}',
           queryParameters: queryParameters,
           data: _data,
         )

@@ -15,16 +15,16 @@ abstract class EmployeesApiService {
   @GET('employees/get')
   Future<List<EmployeeModel>> getEmployeeData();
 
-  @POST('employee/add')
+  @POST('employees/add')
   @MultiPart()
   Future<void> postEmployeeData(
       {@Part() EmployeeModel? employeeModel, @Part() File? file});
 
-  @PUT('employee/edit/{id}')
+  @PUT('employees/edit/{id}')
   @MultiPart()
   Future<void> putEmployeeData(
       {@Part() EmployeeModel? employeeModel, @Part() File? file});
 
-  @DELETE('employee/delete/{id}')
+  @DELETE('employees/delete/{id}')
   Future<void> deleteEmployeeData(@Path() int? id);
 }
