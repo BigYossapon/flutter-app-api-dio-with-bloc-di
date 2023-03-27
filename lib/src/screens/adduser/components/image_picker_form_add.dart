@@ -16,6 +16,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../main.dart';
 import '../../../blocs/api/employees_data_bloc/get/employees/employeesdataget_bloc.dart';
+import '../../../data/model/request_model/request_employee_model.dart';
 
 class ImagePickerFormAdd extends StatelessWidget {
   final BuildContext buildContextpicker;
@@ -96,15 +97,16 @@ class ImagePickerFormAdd extends StatelessWidget {
                   ? Container()
                   : ElevatedButton.icon(
                       onPressed: () {
-                        EmployeeModel employeeModel = EmployeeModel(
-                            name: name!,
-                            mail: mail!,
-                            address: address!,
-                            phone: phone!,
-                            position: position);
-                        context
-                            .read<EmployeedataaddBloc>()
-                            .add(AddEmployeedataEvent(employeeModel, file!));
+                        // RequestEmployeeModel requestemployeeModel =
+                        //     RequestEmployeeModel(
+                        //         name: name!,
+                        //         mail: mail!,
+                        //         address: address!,
+                        //         phone: phone!,
+                        //         position: position!);
+                        context.read<EmployeedataaddBloc>().add(
+                            AddEmployeedataEvent(name!, mail!, address!, phone!,
+                                position!, file!));
                       },
                       icon: const Icon(Icons.upload_file),
                       label: const Text('upload data')));

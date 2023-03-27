@@ -17,6 +17,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../main.dart';
 import '../../../blocs/api/employees_data_bloc/put/employeedataedit_bloc.dart';
+import '../../../data/model/request_model/request_employee_model.dart';
 
 class ImagePickerFormEdit extends StatelessWidget {
   final BuildContext buildContextget;
@@ -117,15 +118,16 @@ class ImagePickerFormEdit extends StatelessWidget {
           }
           return ElevatedButton.icon(
               onPressed: () {
-                EmployeeModel employeeModel = EmployeeModel(
-                    name: name!,
-                    mail: mail!,
-                    address: address!,
-                    phone: phone!,
-                    position: position);
-                contextedit
-                    .read<EmployeedataeditBloc>()
-                    .add(EditEmployeedataEvent(employeeModel, file));
+                RequestEmployeeModel requestemployeeModel =
+                    RequestEmployeeModel(
+                        name: name!,
+                        mail: mail!,
+                        address: address!,
+                        phone: phone!,
+                        position: position);
+                contextedit.read<EmployeedataeditBloc>().add(
+                    EditEmployeedataEvent(
+                        id!, name!, mail!, address!, phone!, position!, file));
                 Navigator.pop(context);
               },
               icon: const Icon(Icons.edit),

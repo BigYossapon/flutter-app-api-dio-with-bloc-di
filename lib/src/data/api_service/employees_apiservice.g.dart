@@ -46,28 +46,56 @@ class _EmployeesApiService implements EmployeesApiService {
   }
 
   @override
-  Future<void> postEmployeeData({
-    employeeModel,
+  Future<void> postEmployeeData(
+    name,
+    mail,
+    address,
+    phone,
+    position,
     file,
-  }) async {
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = FormData();
-    _data.fields.add(MapEntry(
-      'employeeModel',
-      jsonEncode(employeeModel ?? <String, dynamic>{}),
-    ));
-    if (file != null) {
-      _data.files.add(MapEntry(
-        'file',
-        MultipartFile.fromFileSync(
-          file.path,
-          filename: file.path.split(Platform.pathSeparator).last,
-        ),
+    if (name != null) {
+      _data.fields.add(MapEntry(
+        'Name',
+        name,
       ));
     }
+    if (mail != null) {
+      _data.fields.add(MapEntry(
+        'Mail',
+        mail,
+      ));
+    }
+    if (address != null) {
+      _data.fields.add(MapEntry(
+        'Address',
+        address,
+      ));
+    }
+    if (phone != null) {
+      _data.fields.add(MapEntry(
+        'Phone',
+        phone,
+      ));
+    }
+    if (position != null) {
+      _data.fields.add(MapEntry(
+        'Position',
+        position,
+      ));
+    }
+    _data.files.add(MapEntry(
+      'Image_employee',
+      MultipartFile.fromFileSync(
+        file.path,
+        filename: file.path.split(Platform.pathSeparator).last,
+      ),
+    ));
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'POST',
       headers: _headers,
@@ -84,28 +112,60 @@ class _EmployeesApiService implements EmployeesApiService {
   }
 
   @override
-  Future<void> putEmployeeData({
-    employeeModel,
+  Future<void> putEmployeeData(
+    id,
+    name,
+    mail,
+    address,
+    phone,
+    position,
     file,
-  }) async {
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = FormData();
-    _data.fields.add(MapEntry(
-      'employeeModel',
-      jsonEncode(employeeModel ?? <String, dynamic>{}),
-    ));
+    if (name != null) {
+      _data.fields.add(MapEntry(
+        'Name',
+        name,
+      ));
+    }
+    if (mail != null) {
+      _data.fields.add(MapEntry(
+        'Mail',
+        mail,
+      ));
+    }
+    if (address != null) {
+      _data.fields.add(MapEntry(
+        'Address',
+        address,
+      ));
+    }
+    if (phone != null) {
+      _data.fields.add(MapEntry(
+        'Phone',
+        phone,
+      ));
+    }
+    if (position != null) {
+      _data.fields.add(MapEntry(
+        'Position',
+        position,
+      ));
+    }
     if (file != null) {
       _data.files.add(MapEntry(
-        'file',
+        'Image_employee',
         MultipartFile.fromFileSync(
-          file.path,
+          file!.path,
           filename: file.path.split(Platform.pathSeparator).last,
         ),
       ));
     }
+
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'PUT',
       headers: _headers,
@@ -114,7 +174,7 @@ class _EmployeesApiService implements EmployeesApiService {
     )
         .compose(
           _dio.options,
-          'employees/edit/{id}',
+          'employees/edit/${id}',
           queryParameters: queryParameters,
           data: _data,
         )

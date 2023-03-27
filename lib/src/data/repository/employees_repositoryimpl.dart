@@ -7,6 +7,7 @@ import 'package:injectable/injectable.dart';
 
 import '../api_service/employees_apiservice.dart';
 import '../model/employee_model.dart';
+import '../model/request_model/request_employee_model.dart';
 import 'employees_repository.dart';
 
 @lazySingleton
@@ -22,6 +23,7 @@ class EmployeesRepositoryimpl extends EmployeesRepository {
   @override
   Future<void> deleteEmployeeData(int? id) {
     // TODO: implement deleteEmployeeData
+
     return _employeesApiService.deleteEmployeeData(id);
     //throw UnsupportedError;
   }
@@ -34,18 +36,22 @@ class EmployeesRepositoryimpl extends EmployeesRepository {
   }
 
   @override
-  Future<void> postEmployeeData(EmployeeModel employeeModel, File? file) {
+  Future<void> postEmployeeData(String? name, String? mail, String? address,
+      String? phone, String? position, File? file) {
     // TODO: implement postEmployeeData
     return _employeesApiService.postEmployeeData(
-        employeeModel: employeeModel, file: file);
+        name, mail, address, phone, position, file!);
+
     //throw UnsupportedError;
   }
 
   @override
-  Future<void> putEmployeeData(EmployeeModel employeeModel, File? file) {
+  Future<void> putEmployeeData(int? id, String? name, String? mail,
+      String? address, String? phone, String? position, File? file) {
     // TODO: implement putEmployeeData
     return _employeesApiService.putEmployeeData(
-        employeeModel: employeeModel, file: file);
+        id, name, mail, address, phone, position, file);
+
     //throw UnsupportedError;
   }
 }

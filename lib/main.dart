@@ -15,8 +15,8 @@ void main() {
 
   BlocOverrides.runZoned(
     () async {
-      WidgetsFlutterBinding.ensureInitialized();
-      await configureDependencies();
+      // WidgetsFlutterBinding.ensureInitialized();
+      // await configureDependencies();
       runApp(const MyApp());
     },
     blocObserver: AppBlocObserver(),

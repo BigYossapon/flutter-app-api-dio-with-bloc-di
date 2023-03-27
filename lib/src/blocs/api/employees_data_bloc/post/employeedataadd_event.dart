@@ -5,10 +5,11 @@ abstract class EmployeedataaddEvent extends Equatable {
 }
 
 class AddEmployeedataEvent extends EmployeedataaddEvent {
-  EmployeeModel employeeModel;
+  String mail, address, phone, name, position;
   File file;
 
-  AddEmployeedataEvent(this.employeeModel, this.file);
+  AddEmployeedataEvent(
+      this.name, this.mail, this.address, this.phone, this.position, this.file);
 
   @override
   List<Object> get props => [];
