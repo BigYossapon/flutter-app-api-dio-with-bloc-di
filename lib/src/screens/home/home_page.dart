@@ -17,11 +17,11 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final employeeDatagetBloc = BlocProvider<EmployeesdatagetBloc>(
-        create: (context) => EmployeesdatagetBloc(EmployeesRepositoryimpl())
-          ..add(LoadEmployeesdataEvent()));
+        create: (context) =>
+            getIt<EmployeesdatagetBloc>()..add(LoadEmployeesdataEvent()));
 
     final employeedatadeleteBloc = BlocProvider<EmployeedatadeleteBloc>(
-        create: (context) => EmployeedatadeleteBloc(EmployeesRepositoryimpl()));
+        create: (context) => getIt<EmployeedatadeleteBloc>());
 
     return MultiBlocProvider(
         providers: [employeeDatagetBloc, employeedatadeleteBloc],

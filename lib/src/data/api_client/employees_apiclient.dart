@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_app_test01/src/data/api_service/employees_apiservice.dart';
+import 'package:injectable/injectable.dart';
 
+@injectable
 class EmployeesApiClient {
   late final Dio _dio;
   late final EmployeesApiService _service;

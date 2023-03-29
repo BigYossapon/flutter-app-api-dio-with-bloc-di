@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_test01/src/blocs/image_picker/image_picker_bloc.dart';
 import 'package:flutter_app_test01/src/data/repository/employees_repositoryimpl.dart';
+import 'package:flutter_app_test01/src/di/injection.dart';
 
 import 'package:flutter_app_test01/src/screens/adduser/components/image_picker_form_add.dart';
 
@@ -23,8 +24,8 @@ class AddUserDataPage extends StatelessWidget {
     final imagePickerBloc = BlocProvider<ImagePickerBloc>(
         create: (BuildContext context) => ImagePickerBloc());
     final employeeDatapostBloc = BlocProvider<EmployeedataaddBloc>(
-        create: (BuildContext context) =>
-            EmployeedataaddBloc(EmployeesRepositoryimpl()));
+        create: (BuildContext context) => getIt<EmployeedataaddBloc>());
+
     return Scaffold(
         appBar: AppBar(
           title: Text("Add Empployee Data"),

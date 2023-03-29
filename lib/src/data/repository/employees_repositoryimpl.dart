@@ -10,7 +10,6 @@ import '../model/employee_model.dart';
 import '../model/request_model/request_employee_model.dart';
 import 'employees_repository.dart';
 
-@lazySingleton
 @injectable
 class EmployeesRepositoryimpl extends EmployeesRepository {
   late EmployeesApiService _employeesApiService;
