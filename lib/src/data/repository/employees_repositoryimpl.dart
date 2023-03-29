@@ -13,9 +13,11 @@ import 'employees_repository.dart';
 @injectable
 class EmployeesRepositoryimpl extends EmployeesRepository {
   late EmployeesApiService _employeesApiService;
+  // Dio _dio;
 
   EmployeesRepositoryimpl() {
     _employeesApiService = EmployeesApiClient().getService();
+
     // EmployeesApiService(_dio);
   }
 

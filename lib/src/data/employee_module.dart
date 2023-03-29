@@ -15,8 +15,8 @@ abstract class EmployeeModule {
   // EmployeesApiService employeesApiService(
   //     @injectable Dio dio, @injectable LogInterceptor logInterceptor) {
   //   return EmployeesApiService(dio);
-  // }
-
-  @lazySingleton
-  LogInterceptor get loggingInter => LogInterceptor(requestBody: true);
 }
+
+  // @lazySingleton
+  // LogInterceptor get loggingInter => LogInterceptor(requestBody: true);
+

@@ -14,6 +14,7 @@ import 'package:flutter_app_test01/src/blocs/api/employees_data_bloc/post/employ
     as _i4;
 import 'package:flutter_app_test01/src/blocs/api/employees_data_bloc/put/employeedataedit_bloc.dart'
     as _i7;
+import 'package:flutter_app_test01/src/blocs/image_picker/image_picker_bloc.dart';
 import 'package:flutter_app_test01/src/data/api_service/employees_apiservice.dart'
     as _i10;
 import 'package:flutter_app_test01/src/data/repository/employees_repository.dart'
@@ -39,15 +40,15 @@ _i1.GetIt $initGetIt(
     environment,
     environmentFilter,
   );
-  // final employeeModule = _$EmployeeModule();
-  // gh.lazySingleton<_i3.Dio>(() => employeeModule.dio);
+  final employeeModule = _$EmployeeModule();
+  gh.lazySingleton<_i3.Dio>(() => employeeModule.dio);
   gh.factory<_i4.EmployeedataaddBloc>(
       () => _i4.EmployeedataaddBloc(getIt<_i8.EmployeesRepositoryimpl>()));
   gh.factory<_i6.EmployeedatadeleteBloc>(
       () => _i6.EmployeedatadeleteBloc(getIt<_i8.EmployeesRepositoryimpl>()));
   gh.factory<_i7.EmployeedataeditBloc>(
       () => _i7.EmployeedataeditBloc(getIt<_i8.EmployeesRepositoryimpl>()));
-
+  // gh.factory<ImagePickerBloc>(() => ImagePickerBloc(getIt<ImagePickerBloc>()));
   gh.lazySingleton<_i8.EmployeesRepositoryimpl>(
       () => _i8.EmployeesRepositoryimpl());
   gh.factory<_i9.EmployeesdatagetBloc>(
@@ -57,4 +58,4 @@ _i1.GetIt $initGetIt(
   return getIt;
 }
 
-// class _$EmployeeModule extends _i12.EmployeeModule {}
+class _$EmployeeModule extends _i12.EmployeeModule {}
